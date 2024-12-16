@@ -1,10 +1,10 @@
-**Node Js Application**
+# Node Js Application
 
-**Overview**
+## Overview
 
 The backend application is a Node.js and Express.js server that provides APIs for user authentication, role-based access control, and weather data retrieval. It includes features for user registration, login, and user management. The weather data is fetched using AWS Lambda and integrated with OpenWeatherMap API.
 
-**Features**
+## Features
 
 **User Authentication**: Token-based authentication using JWT.
 
@@ -14,7 +14,7 @@ The backend application is a Node.js and Express.js server that provides APIs fo
 
 **Weather Service:** Fetches weather data using AWS Lambda and OpenWeatherMap API.
 
-**Prerequisites**
+## Prerequisites
 
 -Node.js
 
@@ -22,12 +22,12 @@ The backend application is a Node.js and Express.js server that provides APIs fo
 
 -MongoDB
 
-**Installation**
+## Installation
 
 1. Clone the repository: [git clone https://github.com/yourusername/your-repo-name.git](https://github.com/ishubham-nagarro/weather-app.git)
 2. Navigate to the project directory: cd weather-app
 3. Install dependencies: npm install
 
-**Running the Application**
+## Running the Application
 
 ### `npm start`
