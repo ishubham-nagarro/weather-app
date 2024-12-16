@@ -32,13 +32,42 @@ export const deleteUser = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const updates = req.body;
-      const updatedUser = await User.findByIdAndUpdate(id, updates, { new: true });
-      if (!updatedUser) return res.status(404).json({ error: 'User not found' });
-      res.status(200).json({ message: 'User updated successfully', user: updatedUser });
-    } catch (error) {
-      res.status(500).json({ error: 'Update failed' });
-    }
+      const { name, email, role } = req.body;
+  
+      // Input validation
+      if (!name || name.trim() === '') {
+          return res.status(400).json({ error: 'Name is required' });
+      }
+      if (!email || email.trim() === '') {
+          return res.status(400).json({ error: 'Email is required' });
+      }
+      if (!role || !['Admin', 'User'].includes(role)) {
+          return res.status(400).json({ error: 'Role is required and must be Admin or User' });
+      }
+  
+      try {
+          const { id } = req.params;
+  
+          // Restricting Admin to update only users, SuperAdmin can update Admin and Users
+          if (req.user.role === 'Admin') {
+              const targetUser = await User.findById(id);
+              if (targetUser.role === 'Admin') {
+                  return res.status(403).json({ error: 'Admins can only update Users, not other Admins' });
+              }
+          }
+  
+          const updatedUser = await User.findByIdAndUpdate(
+              id,
+              { name, email, role },
+              { new: true, runValidators: true }
+          );
+  
+          if (!updatedUser) {
+              return res.status(404).json({ error: 'User not found' });
+          }
+  
+          res.status(200).json({ message: 'User updated successfully', user: updatedUser });
+      } catch (error) {
+          res.status(500).json({ error: 'Could not update user' });
+      }
   };
