@@ -2,9 +2,21 @@ import User from '../models/User.js';
 
 export const getAllUsers = async (req, res) => {
     try {
-        const users = await User.find().select('-password');
-        res.status(200).json(users);
+    const { role, id } = req.user; // Extract role and id from the authenticated user
+
+    let users;
+    if (role === 'SuperAdmin') {
+        // SuperAdmin: Fetch all users and admins, exclude the caller
+        users = await User.find({ _id: { $ne: id } }).select('-password');
+    } else if (role === 'Admin') {
+        // Admin: Fetch only users, exclude the caller
+        users = await User.find({ _id: { $ne: id }, role: 'User' }).select('-password');
+    } else {
+        return res.status(403).json({ error: 'Access denied' });
+    }
+    res.status(200).json(users);
     } catch (error) {
+        console.error('Error fetching users:', error);
         res.status(500).json({ error: 'Could not fetch users' });
     }
 };
