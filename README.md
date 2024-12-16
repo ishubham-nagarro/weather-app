@@ -30,4 +30,4 @@ The backend application is a Node.js and Express.js server that provides APIs fo
 
 **Running the Application**
 
-npm start
+### `npm start`
