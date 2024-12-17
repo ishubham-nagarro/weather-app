@@ -14,6 +14,14 @@ The backend application is a Node.js and Express.js server that provides APIs fo
 
 **Weather Service:** Fetches weather data using AWS Lambda and OpenWeatherMap API.
 
+## Credentials
+
+**SuperAdmin**: email: superadmin@gmail.com password: Bansal1999
+
+**Admin**: email: shubhambansal@gmail.com password: Bansal1999
+
+**User**: email: gourabbanerjee@gmail.com password: test@123
+
 ## Prerequisites
 
 -Node.js
