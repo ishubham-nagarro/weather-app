@@ -32,10 +32,10 @@ export const deleteUser = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-      const { name, email, role } = req.body;
+      const { fullName, email, role } = req.body;
   
       // Input validation
-      if (!name || name.trim() === '') {
+      if (!fullName || fullName.trim() === '') {
           return res.status(400).json({ error: 'Name is required' });
       }
       if (!email || email.trim() === '') {
@@ -58,7 +58,7 @@ export const updateUser = async (req, res) => {
   
           const updatedUser = await User.findByIdAndUpdate(
               id,
-              { name, email, role },
+              { fullName, email, role },
               { new: true, runValidators: true }
           );
   
