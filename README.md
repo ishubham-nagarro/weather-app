@@ -24,11 +24,11 @@ The backend application is a Node.js and Express.js server that provides APIs fo
 
 ## Prerequisites
 
--Node.js
+`Node.js v22.2.0`
 
--npm
+`npm`
 
--MongoDB
+`MongoDB`
 
 ## Installation
 
